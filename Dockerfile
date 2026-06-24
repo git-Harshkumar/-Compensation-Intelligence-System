@@ -1,0 +1,16 @@
+FROM python:3.13-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV LEVELLENS_HOST=0.0.0.0
+ENV LEVELLENS_PORT=10000
+ENV LEVELLENS_DATA_DIR=/app/data
+
+WORKDIR /app
+COPY server ./server
+COPY web ./web
+COPY README.md ./README.md
+RUN mkdir -p /app/data
+
+EXPOSE 10000
+CMD ["python", "-m", "server.app"]
