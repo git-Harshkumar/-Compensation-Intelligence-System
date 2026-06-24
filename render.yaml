@@ -1,9 +1,8 @@
 services:
   - type: web
     name: compensation-intelligence-system
-    runtime: python
-    buildCommand: "echo 'No build step required'"
-    startCommand: "python -m server.app"
+    runtime: docker
+    dockerfilePath: ./deploy/Dockerfile
     plan: free
     envVars:
       - key: LEVELLENS_HOST
@@ -11,12 +10,12 @@ services:
       - key: LEVELLENS_PORT
         value: 10000
       - key: LEVELLENS_DATA_DIR
-        value: /opt/render/project/src/data
+        value: /app/data
       - key: LEVELLENS_DB_PATH
-        value: /opt/render/project/src/data/levellens.sqlite3
+        value: /app/data/levellens.sqlite3
       - key: LEVELLENS_SESSION_DAYS
         value: 7
     disk:
       name: data
-      mountPath: /opt/render/project/src/data
+      mountPath: /app/data
       sizeGB: 1
